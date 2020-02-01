@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render header correctly 1`] = `
+<div>
+  <h1>
+    Bug Tracker
+  </h1>
+  <[object Object]
+    to="/"
+  >
+    Dashboard
+  </[object Object]>
+  <[object Object]
+    to="/create"
+  >
+    Add Bug
+  </[object Object]>
+</div>
+`;

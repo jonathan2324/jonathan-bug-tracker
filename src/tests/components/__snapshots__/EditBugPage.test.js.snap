@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render EditBugPage 1`] = `
+<div>
+  <h2>
+    Ticket number: 
+    1
+  </h2>
+  <BugForm
+    bug={
+      Object {
+        "completed": true,
+        "createdAt": 0,
+        "description": "Error in X",
+        "id": "1",
+        "name": "Lebron",
+        "notes": "notes 1",
+        "severity": "moderate",
+      }
+    }
+    onSubmit={[Function]}
+  />
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+</div>
+`;

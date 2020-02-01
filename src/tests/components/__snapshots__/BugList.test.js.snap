@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render bug list with no items 1`] = `
+<div>
+  <p>
+    No bugs
+  </p>
+</div>
+`;
+
+exports[`should render bug list with given bugs 1`] = `
+<div>
+  <React.Memo
+    completed={true}
+    createdAt={0}
+    description="Error in X"
+    id="1"
+    key="1"
+    name="Lebron"
+    notes="notes 1"
+    severity="moderate"
+  />
+  <React.Memo
+    completed={false}
+    createdAt={-345600000}
+    description="Error in dashboard"
+    id="2"
+    key="2"
+    name="Steph"
+    notes="notes 2"
+    severity="urgent"
+  />
+  <React.Memo
+    completed={false}
+    createdAt={345600000}
+    description="database error"
+    id="3"
+    key="3"
+    name="Jon"
+    notes="notes 3"
+    severity="low"
+  />
+</div>
+`;

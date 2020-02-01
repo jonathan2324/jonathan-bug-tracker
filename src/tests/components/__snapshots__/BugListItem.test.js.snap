@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render bug list items 1`] = `
+<div>
+  <[object Object]
+    to="/edit/1"
+  >
+    <h3>
+      Lebron
+    </h3>
+    <p>
+      Error in X
+    </p>
+    <p>
+      moderate
+       - 
+      0
+    </p>
+  </[object Object]>
+  <button
+    onClick={[Function]}
+  >
+    Closed
+  </button>
+</div>
+`;

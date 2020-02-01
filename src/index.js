@@ -1,10 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { Provider,  } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
+import AppRouter from './routers/AppRouter'
+import configureStore from './store/configureStore'
+import 'react-dates/lib/css/_datepicker.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore()
+
+// store.dispatch(addBug({ name: 'Jonathan Huertas', description: 'Error in function ABC', severity: 'urgent'}))
+// store.dispatch(addBug({ name: 'Kanye West', severity: 'low', createdAt: 1000}))
+// store.dispatch(addBug({ name: 'Lebron James', severity: 'moderate'}))
+// store.dispatch(addBug({ name: 'Step curry', severity: 'urgent'}))
+// store.dispatch(sortByDate())
+
+// const state = store.getState()
+// const visibleBugs = getVisibleBugs(state.bugs, state.filters)
+// console.log(visibleBugs)
+
+
+
+
+
+const jsx = (
+    
+        <Provider store={store}>
+            <AppRouter />
+        
+        </Provider>
+    
+)
+
+ReactDOM.render(jsx, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
