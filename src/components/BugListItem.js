@@ -10,6 +10,7 @@ export const BugListItem = ({ dispatch, id, name, description, priority, created
             <h3>
                 {name}
             </h3>
+        </Link>
             <p>{description}</p>
             
             <p>{priority}</p>
@@ -17,7 +18,7 @@ export const BugListItem = ({ dispatch, id, name, description, priority, created
             <p>
                 {moment(createdAt).format('MMMM Do, YYYY')}
             </p>
-        </Link>
+        
 
         <button onClick={(e) => dispatch(toggleCompletedBug(id, completed))}>{completed ? 'Closed': 'Open'}</button>
     </div>
