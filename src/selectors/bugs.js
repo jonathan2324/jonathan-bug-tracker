@@ -13,15 +13,6 @@ const getVisibleBugs = (bugs, { text, sortBy, startDate, endDate }) => {
         if(sortBy === 'date') {
             return a.createdAt < b.createdAt ? 1 : -1
         }
-        else if (sortBy === 'severity') {
-            if (a.severity === 'urgent') {
-                return a.severity < b.severity ? 1 : -1
-            } else if (a.severity === 'moderate') {
-                return a.severity > b.severity ? -1 : 1 
-            } else {
-                return 0
-            }
-        }
         else {
             return null
         }
@@ -31,6 +22,18 @@ const getVisibleBugs = (bugs, { text, sortBy, startDate, endDate }) => {
        } else {
            return 0
        }
+    }).sort((a, b) => {
+        if(sortBy === 'priority') {
+            if(a.priority === 'High') {
+                return b.priority === 'Med' || b.priority === 'Low' ? -1 : 1
+            }
+            else if (a.priority === 'Med') {
+                return b.priority === 'High' ? 1 : -1
+            } else {
+                return 0
+            }
+        }
+            
     })
 }
 

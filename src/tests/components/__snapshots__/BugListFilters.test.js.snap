@@ -17,9 +17,9 @@ exports[`Snapshot test of BugListFilters 1`] = `
       Date
     </option>
     <option
-      value="severity"
+      value="priority"
     >
-      Severity
+      Priority
     </option>
     <option
       value="completed"
@@ -130,9 +130,9 @@ exports[`Snapshot test of BugListFilters with alt data correctly 1`] = `
       Date
     </option>
     <option
-      value="severity"
+      value="priority"
     >
-      Severity
+      Priority
     </option>
     <option
       value="completed"

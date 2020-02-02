@@ -2,16 +2,20 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
 import { toggleCompletedBug } from '../actions/bugs'
+import moment from 'moment'
 
-export const BugListItem = ({ dispatch, id, name, description, severity, createdAt, completed}) => (
+export const BugListItem = ({ dispatch, id, name, description, priority, createdAt, completed}) => (
     <div>
         <Link to={`/edit/${id}`}>
             <h3>
                 {name}
             </h3>
             <p>{description}</p>
+            
+            <p>{priority}</p>
+
             <p>
-                {severity} - {createdAt}
+                {moment(createdAt).format('MMMM Do, YYYY')}
             </p>
         </Link>
 

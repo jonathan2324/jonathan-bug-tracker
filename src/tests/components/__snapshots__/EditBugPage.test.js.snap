@@ -15,7 +15,7 @@ exports[`Should render EditBugPage 1`] = `
         "id": "1",
         "name": "Lebron",
         "notes": "notes 1",
-        "severity": "moderate",
+        "priority": "Med",
       }
     }
     onSubmit={[Function]}

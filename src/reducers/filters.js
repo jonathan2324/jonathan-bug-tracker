@@ -16,10 +16,10 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
                 ...state,
                 text: action.text
             }
-        case 'SORT_BY_SEVERITY':
+        case 'SORT_BY_PRIORITY':
             return {
                 ...state,
-                sortBy: 'severity'
+                sortBy: 'priority'
             }
         case 'SORT_BY_DATE':
             return {

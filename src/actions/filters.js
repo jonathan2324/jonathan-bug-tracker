@@ -5,9 +5,9 @@ export const setTextFilter = (text = '') => ({
     type: 'SET_TEXT_FILTER',
     text
 })
-//SORT_BY_SEVERITY
-export const sortBySeverity = () => ({
-    type: 'SORT_BY_SEVERITY'
+//SORT_BY_PRIORITY
+export const sortByPriority = () => ({
+    type: 'SORT_BY_PRIORITY'
 })
 //SORT_BY_DATE
 export const sortByDate = () => ({

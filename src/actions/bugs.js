@@ -6,7 +6,7 @@ export const addBug = (
         name = '',
         description = '',
         notes = '',
-        severity = 'low',
+        priority = 'Low',
         completed = false,
         createdAt = 0  } = {}
     ) => ({
@@ -16,7 +16,7 @@ export const addBug = (
         name,
         description,
         notes,
-        severity,
+        priority,
         completed,
         createdAt
     }

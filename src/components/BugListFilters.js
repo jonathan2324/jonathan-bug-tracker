@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { setTextFilter, sortByDate, sortBySeverity, setStartDate, setEndDate, sortByCompleted } from '../actions/filters'
+import { setTextFilter, sortByDate, sortByPriority, setStartDate, setEndDate, sortByCompleted } from '../actions/filters'
 import { DateRangePicker } from 'react-dates'
 
 
@@ -26,8 +26,8 @@ export class BugListFilters extends React.Component {
     onSortChange = (e) => {
         if (e.target.value === "date") {
             this.props.sortByDate()
-        } else if (e.target.value === 'severity') {
-            this.props.sortBySeverity()
+        } else if (e.target.value === 'priority') {
+            this.props.sortByPriority()
         } else if (e.target.value === 'completed') {
             this.props.sortByCompleted()
         }
@@ -39,7 +39,7 @@ export class BugListFilters extends React.Component {
                 <input type='text' value={this.props.filters.text} onChange={this.onTextChange}/>
                 <select value={this.props.filters.sortBy} onChange={this.onSortChange}>
                     <option value='date'>Date</option>
-                    <option value='severity'>Severity</option>
+                    <option value='priority'>Priority</option>
                     <option value='completed'>Completed status</option>
                 </select>
                 <DateRangePicker 
@@ -67,7 +67,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
     sortByDate: () => dispatch(sortByDate()),
-    sortBySeverity: () => dispatch(sortBySeverity()),
+    sortByPriority: () => dispatch(sortByPriority()),
     sortByCompleted: () => dispatch(sortByCompleted()),
     setStartDate: (startDate) => dispatch(setStartDate(startDate)),
     setEndDate: (endDate) => dispatch(setEndDate(endDate))

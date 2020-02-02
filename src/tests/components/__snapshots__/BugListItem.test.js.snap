@@ -12,9 +12,10 @@ exports[`Should render bug list items 1`] = `
       Error in X
     </p>
     <p>
-      moderate
-       - 
-      0
+      Med
+    </p>
+    <p>
+      December 31st, 1969
     </p>
   </[object Object]>
   <button

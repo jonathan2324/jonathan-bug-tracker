@@ -18,7 +18,7 @@ exports[`should render bug list with given bugs 1`] = `
     key="1"
     name="Lebron"
     notes="notes 1"
-    severity="moderate"
+    priority="Med"
   />
   <React.Memo
     completed={false}
@@ -28,7 +28,7 @@ exports[`should render bug list with given bugs 1`] = `
     key="2"
     name="Steph"
     notes="notes 2"
-    severity="urgent"
+    priority="High"
   />
   <React.Memo
     completed={false}
@@ -38,7 +38,7 @@ exports[`should render bug list with given bugs 1`] = `
     key="3"
     name="Jon"
     notes="notes 3"
-    severity="low"
+    priority="Low"
   />
 </div>
 `;

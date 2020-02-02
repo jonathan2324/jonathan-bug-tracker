@@ -5,7 +5,7 @@ const bugs = [{
     name: 'Lebron',
     description: 'Error in X',
     notes: 'notes 1',
-    severity: 'moderate',
+    priority: 'Med',
     createdAt: 0,
     completed: true
 
@@ -14,7 +14,7 @@ const bugs = [{
     name: 'Steph',
     description: 'Error in dashboard',
     notes: 'notes 2',
-    severity: "urgent",
+    priority: "High",
     createdAt: moment(0).subtract(4, 'days').valueOf(),
     completed: false
 }, {
@@ -22,7 +22,7 @@ const bugs = [{
     name: 'Jon',
     description: 'database error',
     notes: 'notes 3',
-    severity: 'low',
+    priority: 'Low',
     createdAt: moment(0).add(4, 'days').valueOf(),
     completed: false
 

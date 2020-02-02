@@ -12,7 +12,7 @@ class BugForm extends React.Component {
         super(props)
         this.state = {
             name: props.bug ? props.bug.name : '',
-            severity: props.bug ? props.bug.severity : 'low',
+            priority: props.bug ? props.bug.priority : 'Low',
             description: props.bug ? props.bug.description : '',
             notes: props.bug ? props.bug.notes : '',
             createdAt: props.bug ? moment(props.bug.createdAt) : moment(),
@@ -38,9 +38,9 @@ class BugForm extends React.Component {
         this.setState(() => ({ notes }))       
     }
 
-    onSeverityChange = (e) => {
-        const severity = e.target.value
-        this.setState(() => ({ severity }))
+    onPriorityChange = (e) => {
+        const priority = e.target.value
+        this.setState(() => ({ priority }))
     }
 
     onDateChange = (createdAt) => {
@@ -69,7 +69,7 @@ class BugForm extends React.Component {
                 notes: this.state.notes,
                 name: this.state.name,
                 createdAt: this.state.createdAt.valueOf(),
-                severity: this.state.severity
+                priority: this.state.priority
             })
         }
     }
@@ -80,10 +80,10 @@ class BugForm extends React.Component {
                 <p>{this.state.error}</p>
                 <form onSubmit={this.onSubmit}>
                     <input type='text' placeholder='Employee name' autoFocus value={this.state.name} onChange={this.onNameChange}/>
-                    <select value={this.state.severity} onChange={this.onSeverityChange}>
-                        <option value="urgent">Urgent</option>
-                        <option value="moderate">Moderate</option>
-                        <option value="low">Low</option>
+                    <select value={this.state.priority} onChange={this.onPriorityChange}>
+                        <option value="High">High</option>
+                        <option value="Med">Med</option>
+                        <option value="Low">Low</option>
                     </select>
 
                     <SingleDatePicker

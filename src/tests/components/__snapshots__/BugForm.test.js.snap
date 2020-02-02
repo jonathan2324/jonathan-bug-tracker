@@ -15,20 +15,20 @@ exports[`Should render BugForm with data 1`] = `
     />
     <select
       onChange={[Function]}
-      value="moderate"
+      value="Med"
     >
       <option
-        value="urgent"
+        value="High"
       >
-        Urgent
+        High
       </option>
       <option
-        value="moderate"
+        value="Med"
       >
-        Moderate
+        Med
       </option>
       <option
-        value="low"
+        value="Low"
       >
         Low
       </option>
@@ -144,20 +144,20 @@ exports[`Should render bug form correctly 1`] = `
     />
     <select
       onChange={[Function]}
-      value="low"
+      value="Low"
     >
       <option
-        value="urgent"
+        value="High"
       >
-        Urgent
+        High
       </option>
       <option
-        value="moderate"
+        value="Med"
       >
-        Moderate
+        Med
       </option>
       <option
-        value="low"
+        value="Low"
       >
         Low
       </option>
@@ -273,20 +273,20 @@ exports[`Should render error for invalid form submission 1`] = `
     />
     <select
       onChange={[Function]}
-      value="low"
+      value="Low"
     >
       <option
-        value="urgent"
+        value="High"
       >
-        Urgent
+        High
       </option>
       <option
-        value="moderate"
+        value="Med"
       >
-        Moderate
+        Med
       </option>
       <option
-        value="low"
+        value="Low"
       >
         Low
       </option>
@@ -404,20 +404,20 @@ exports[`Should render error for invalid form submission 2`] = `
     />
     <select
       onChange={[Function]}
-      value="low"
+      value="Low"
     >
       <option
-        value="urgent"
+        value="High"
       >
-        Urgent
+        High
       </option>
       <option
-        value="moderate"
+        value="Med"
       >
-        Moderate
+        Med
       </option>
       <option
-        value="low"
+        value="Low"
       >
         Low
       </option>
