@@ -7,7 +7,7 @@ export const BugsSummary = ({ bugCount, uncompletedBugs }) => {
     const needWord = uncompletedBugs === 1 ? 'needs' : 'need'
     return (
         <div>
-            <p>Viewing {uncompletedBugs} {tasksWord} that {needWord} to be completed</p>
+            {uncompletedBugs === 0 ? <p></p> : <p>Viewing {uncompletedBugs} {tasksWord} that {needWord} to be completed</p>}
         </div>
     )
 
