@@ -30,6 +30,7 @@ export class EditBugPage extends React.Component {
       <button 
         
         onClick={this.onRemove}>Remove</button>
+      <p>would need updates array here as a list component</p>
     </div>
   );
 }

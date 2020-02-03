@@ -6,7 +6,8 @@ const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
     startDate: moment().startOf('month'),
-    endDate: moment().endOf('month')
+    endDate: moment().endOf('month'),
+    filterBy: 'all'
 }
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
@@ -40,6 +41,21 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
             return {
                 ...state,
                 endDate: action.endDate
+            }
+        case 'FILTER_DEFAULT':
+            return {
+                ...state,
+                filterBy: 'all'
+            }
+        case 'FILTER_BY_COMPLETED':
+            return {
+                ...state,
+                filterBy: 'completed'
+            }
+        case 'FILTER_BY_UNCOMPLETED':
+            return {
+                ...state,
+                filterBy: 'uncompleted'
             }
         default: 
             return state
