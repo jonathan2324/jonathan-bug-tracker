@@ -33,6 +33,10 @@ const getVisibleBugs = (bugs, { text, sortBy, startDate, endDate, filterBy }) =>
             } else {
                 return 0
             }
+        
+        }
+        else {
+            return null
         }
             
     }).filter((bug) => {

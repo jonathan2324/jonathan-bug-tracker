@@ -8,7 +8,9 @@ export const addBug = (
         notes = '',
         priority = 'Low',
         completed = false,
-        createdAt = 0  } = {}
+        createdAt = 0,
+        contributions = []
+      } = {}
     ) => ({
     type: 'ADD_BUG',
     bug: {
@@ -18,7 +20,8 @@ export const addBug = (
         notes,
         priority,
         completed,
-        createdAt
+        createdAt,
+        contributions
     }
     
 })
@@ -42,4 +45,20 @@ export const toggleCompletedBug = (id, completed) => ({
     type: 'TOGGLE_COMPLETED_BUG',
     id,
     completed
+})
+
+//ADD_CONTRIBUTION
+export const addContribution = (id, {
+    name = '',
+    contribution = ''
+}) => ({
+    type: 'ADD_CONTRIBUTION',
+    id,
+    contribution:
+    {
+        id: uuid(),
+        name,
+        contribution
+    }
+
 })

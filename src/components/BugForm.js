@@ -97,7 +97,7 @@ class BugForm extends React.Component {
 
                     <textarea type='text' maxLength="50" placeholder='Enter error description (max length 50 characters)' value={this.state.description} onChange={this.onDescriptionChange}/>
                     <textarea type='text' placeholder='Enter important notes about error' value={this.state.notes} onChange={this.onNotesChange}/>
-                    <button>Add Bug</button>
+                    <button>Save Bug</button>
 
                 </form>
             </div>

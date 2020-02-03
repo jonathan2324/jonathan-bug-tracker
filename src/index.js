@@ -8,6 +8,7 @@ import 'react-dates/lib/css/_datepicker.css'
 
 const store = configureStore()
 
+
 // store.dispatch(addBug({ name: 'Jonathan Huertas', description: 'Error in function ABC', severity: 'urgent'}))
 // store.dispatch(addBug({ name: 'Kanye West', severity: 'low', createdAt: 1000}))
 // store.dispatch(addBug({ name: 'Lebron James', severity: 'moderate'}))

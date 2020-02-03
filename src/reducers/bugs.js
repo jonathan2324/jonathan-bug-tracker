@@ -35,6 +35,20 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                     return bug
                 }
             })
+        case 'ADD_CONTRIBUTION':
+            return state.map((bug) => {
+                if(bug.id === action.id){
+                    return {
+                        ...bug,
+                        contributions: [
+                            
+                            action.contribution,
+                            ...bug.contributions,
+                            
+                        ]
+                    }
+                } else return bug
+            })
         default:
             return state;
     }

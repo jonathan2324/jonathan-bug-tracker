@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import BugForm from '../components/BugForm'
 import { removeBug } from '../actions/bugs'
 import { editBug } from '../actions/bugs';
+import { addContribution } from '../actions/bugs'
+import { ContributionForm } from './ContributionsForm';
+import ContributionsList from '../components/ContributionsList'
 
 export class EditBugPage extends React.Component {
   //method for onSubmit using editBug  dispatch action 
@@ -15,6 +18,10 @@ export class EditBugPage extends React.Component {
     this.props.removeBug({ id: this.props.bug.id })
     this.props.history.push('/')
 
+  }
+
+  addContribution = (contributionObj) => {
+    this.props.addContribution(this.props.bug.id, contributionObj)
   }
 
   render() {
@@ -30,7 +37,8 @@ export class EditBugPage extends React.Component {
       <button 
         
         onClick={this.onRemove}>Remove</button>
-      <p>would need updates array here as a list component</p>
+      <ContributionForm bug={this.props.bug} addContribution={this.addContribution}/>
+      <ContributionsList bug={this.props.bug}/>
     </div>
   );
 }
@@ -46,7 +54,8 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     editBug: (id, bugFormObj) => dispatch(editBug(id, bugFormObj)),
-    removeBug: (data) => dispatch(removeBug(data)) //we can call the variable being passed in whatever we want 
+    removeBug: (data) => dispatch(removeBug(data)), //we can call the variable being passed in whatever we want 
+    addContribution: (id, contributionObj) => dispatch(addContribution(id, contributionObj))
   }
 }
 
