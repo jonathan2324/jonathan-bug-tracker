@@ -62,3 +62,18 @@ export const addContribution = (id, {
     }
 
 })
+
+//EDIT_CONTRIBUTION
+export const editContribution = (bugID, contributionID, updatedContribution) => ({
+    type: 'EDIT_CONTRIBUTION',
+    bugID,
+    contributionID,
+    updatedContribution
+})
+
+//REMOVE_CONTRIBUTION
+export const removeContribution = (bugID, contributionID) => ({
+    type: 'REMOVE_CONTRIBUTION',
+    bugID,
+    contributionID
+})

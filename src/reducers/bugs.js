@@ -49,6 +49,39 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                     }
                 } else return bug
             })
+        case 'EDIT_CONTRIBUTION':
+            return state.map((bug) => {
+                if(bug.id === action.bugID) {
+                    return {
+                        ...bug,
+                        contributions: bug.contributions.map((contribution) => {
+                            if(contribution.id === action.contributionID){
+                                return {
+                                    ...contribution,
+                                    ...action.updatedContribution
+                                }
+                            } else {
+                                return contribution
+                            }
+                        })
+                    }
+                } else {
+                    return bug
+                }
+            })
+        case 'REMOVE_CONTRIBUTION':
+            return state.map((bug) => {
+                if (bug.id === action.bugID) {
+                    return {
+                        ...bug,
+                        contributions: bug.contributions.filter((contribution) => {
+                            return (contribution.id !== action.contributionID)
+                        })
+                    }
+                } else {
+                    return bug
+                }
+            })
         default:
             return state;
     }

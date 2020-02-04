@@ -4,7 +4,7 @@ import BugForm from '../components/BugForm'
 import { removeBug } from '../actions/bugs'
 import { editBug } from '../actions/bugs';
 import { addContribution } from '../actions/bugs'
-import { ContributionForm } from './ContributionsForm';
+import { ContributionsForm } from './ContributionsForm';
 import ContributionsList from '../components/ContributionsList'
 
 export class EditBugPage extends React.Component {
@@ -37,7 +37,7 @@ export class EditBugPage extends React.Component {
       <button 
         
         onClick={this.onRemove}>Remove</button>
-      <ContributionForm bug={this.props.bug} addContribution={this.addContribution}/>
+      <ContributionsForm bug={this.props.bug} onSubmitContribution={this.addContribution}/>
       <ContributionsList bug={this.props.bug}/>
     </div>
   );

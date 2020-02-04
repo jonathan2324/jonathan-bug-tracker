@@ -2,12 +2,13 @@ import React from 'react'
 
 
 
-export class ContributionForm extends React.Component {
+export class ContributionsForm extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-            name: '',
-            contribution: ''
+            name: this.props.contribution ? this.props.contribution.name : '',
+            contribution: this.props.contribution ? this.props.contribution.contribution : '',
+            error: ''
         }
     }
 
@@ -27,10 +28,16 @@ export class ContributionForm extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        this.props.addContribution({
-            name: this.state.name,
-            contribution: this.state.contribution
-        })
+        if(!this.state.name || !this.state.contribution) {
+            this.setState(() => ({ error: 'Please provide a name and a contribution'}))
+        } else {
+            this.setState(() => ({ error: ''}))
+            this.props.onSubmitContribution({
+                name: this.state.name,
+                contribution: this.state.contribution
+            })
+        }
+        
 
         this.setState(() => ({
             name: '',
@@ -43,6 +50,7 @@ export class ContributionForm extends React.Component {
     render () {
         return (
             <div>
+                <p>{this.state.error}</p>
                 <form onSubmit={this.onSubmit}>
                     <input type='text' placeholder='Enter name' value={this.state.name} onChange={this.onNameChange}/>
                     <input type='text' placeholder='Enter contribution' value={this.state.contribution} onChange={this.onContributionChange}/>
@@ -55,4 +63,4 @@ export class ContributionForm extends React.Component {
 }
 
 
-export default ContributionForm
+export default ContributionsForm
