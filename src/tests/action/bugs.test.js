@@ -1,4 +1,10 @@
-import { addBug, editBug, removeBug } from '../../actions/bugs'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { addBug, editBug, removeBug, startAddBug } from '../../actions/bugs'
+import bugs from '../fixtures/bugs'
+import database from '../../firebase/firebase'
+
+const createMockStore = configureMockStore([thunk])
 
 //Test removeBug action object
 test('Should setup removeBug action object', () => {
@@ -22,41 +28,63 @@ test('Should setup editBug action object', () => {
     })
 })
 
+
 //Test addBug action object
 test('Should setup addBug action object with provided values', () => {
-    const bug = {
-        name: 'Jonathan',
-        completed: false,
-        severity: 'moderate',
-        createdAt: 1000,
-        description: 'Error in frontpage',
-        notes: 'Error with filtering on frontpage'
-    }
-    const action = addBug(bug)
+    const action = addBug(bugs[1])
 
     expect(action).toEqual({
         type: 'ADD_BUG',
-        bug: {
-            ...bug,
-            id: expect.any(String)
-        }
+        bug: bugs[1]
     })
 })
 
-test('Should setup addBug action object with default values', () => {
-    const bug={
-        name: '',
-        severity: 'low',
+test("Should add bug to database and store", (done) => {
+    const store = createMockStore({})
+    const bugData = {
+        name: 'Louis',
+        priority: 'Med',
         completed: false,
-        description: '',
-        notes: '',
-        createdAt: 0
+        description: 'Error on front page',
+        notes: 'Error on front page1',
+        createdAt: 1000,
+        contributions: []
     }
-    const action = addBug()
-    expect(action).toEqual(
-        {type: 'ADD_BUG',
-        bug: {
-        ...bug,
-        id: expect.any(String)
-    }})
+
+    
+    //promise chaining 
+    store.dispatch(startAddBug(bugData)).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({
+            type: 'ADD_BUG',
+            bug: {
+                id: expect.any(String),
+                ...bugData
+            }
+        })
+        return database.ref(`bugs/${actions[0].bug.id}`).once('value')
+    }).then((snapshot) => {
+        expect(snapshot.val()).toEqual(bugData)
+        done()
+    })
 })
+
+
+
+// test('Should setup addBug action object with default values', () => {
+//     const bug={
+//         name: '',
+//         severity: 'low',
+//         completed: false,
+//         description: '',
+//         notes: '',
+//         createdAt: 0
+//     }
+//     const action = addBug()
+//     expect(action).toEqual(
+//         {type: 'ADD_BUG',
+//         bug: {
+//         ...bug,
+//         id: expect.any(String)
+//     }})
+// })

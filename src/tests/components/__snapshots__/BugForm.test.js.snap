@@ -123,7 +123,7 @@ exports[`Should render BugForm with data 1`] = `
       value="notes 1"
     />
     <button>
-      Add Bug
+      Save Bug
     </button>
   </form>
 </div>
@@ -252,7 +252,7 @@ exports[`Should render bug form correctly 1`] = `
       value=""
     />
     <button>
-      Add Bug
+      Save Bug
     </button>
   </form>
 </div>
@@ -381,7 +381,7 @@ exports[`Should render error for invalid form submission 1`] = `
       value=""
     />
     <button>
-      Add Bug
+      Save Bug
     </button>
   </form>
 </div>
@@ -512,7 +512,7 @@ exports[`Should render error for invalid form submission 2`] = `
       value=""
     />
     <button>
-      Add Bug
+      Save Bug
     </button>
   </form>
 </div>

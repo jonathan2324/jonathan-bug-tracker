@@ -46,15 +46,6 @@ test('Should set description on text area change', () => {
     expect(wrapper.state('description')).toBe(value)
 })
 
-//onSeverityChange
-test('Should set severity on select change', () => {
-    const value = 'moderate'
-    const wrapper = shallow(<BugForm />)
-    wrapper.find('select').simulate('change', {
-        target: { value }
-    })
-    expect(wrapper.state('severity')).toBe(value)
-})
 
 test('Should call onSubmit prop for valid form submission', () => {
     const onSubmitSpy = jest.fn()
@@ -66,7 +57,7 @@ test('Should call onSubmit prop for valid form submission', () => {
     expect(onSubmitSpy).toHaveBeenLastCalledWith({
         name: bugs[0].name,
         description: bugs[0].description,
-        severity: bugs[0].severity,
+        priority: bugs[0].priority,
         createdAt: bugs[0].createdAt,
         notes: bugs[0].notes,
     }) //include completed?

@@ -25,5 +25,32 @@ exports[`Should render EditBugPage 1`] = `
   >
     Remove
   </button>
+  <ContributionsForm
+    bug={
+      Object {
+        "completed": true,
+        "createdAt": 0,
+        "description": "Error in X",
+        "id": "1",
+        "name": "Lebron",
+        "notes": "notes 1",
+        "priority": "Med",
+      }
+    }
+    onSubmitContribution={[Function]}
+  />
+  <ContributionsList
+    bug={
+      Object {
+        "completed": true,
+        "createdAt": 0,
+        "description": "Error in X",
+        "id": "1",
+        "name": "Lebron",
+        "notes": "notes 1",
+        "priority": "Med",
+      }
+    }
+  />
 </div>
 `;

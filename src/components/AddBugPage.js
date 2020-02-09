@@ -1,11 +1,11 @@
 import React from 'react';
 import BugForm from './BugForm'
 import { connect } from 'react-redux'
-import { addBug } from '../actions/bugs'
+import { startAddBug } from '../actions/bugs'
 
 export class AddBugPage extends React.Component {
   onSubmit = (bug) => {
-    this.props.addBug(bug)
+    this.props.startAddBug(bug)
     this.props.history.push('/')
   }
   render() {
@@ -21,7 +21,7 @@ export class AddBugPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addBug:(bug) => dispatch(addBug(bug))
+    startAddBug:(bug) => dispatch(startAddBug(bug))
   }
 }
 

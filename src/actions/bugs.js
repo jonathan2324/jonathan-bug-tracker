@@ -1,30 +1,36 @@
 import uuid from 'uuid'
+import database from '../firebase/firebase'
 
 //ADD_BUG
-export const addBug = (
-    { 
-        name = '',
-        description = '',
-        notes = '',
-        priority = 'Low',
-        completed = false,
-        createdAt = 0,
-        contributions = []
-      } = {}
-    ) => ({
+export const addBug = (bug) => ({
     type: 'ADD_BUG',
-    bug: {
-        id: uuid(),
-        name,
-        description,
-        notes,
-        priority,
-        completed,
-        createdAt,
-        contributions
-    }
+    bug
     
 })
+
+//START addBUg
+export const startAddBug = (bugData = {}) => {
+    return (dispatch) => {
+        const { 
+            name = '',
+            description = '',
+            notes = '',
+            priority = 'Low',
+            completed = false,
+            createdAt = 0,
+            contributions = []
+          } = bugData
+
+          const bug = { name, description, priority, completed, notes, createdAt, contributions }
+
+          return database.ref('bugs').push(bug).then((ref) => {
+              dispatch(addBug({
+                  id: ref.key,
+                  ...bug
+              }))
+          })
+    }
+}
 
 //REMOVE_BUG
 
