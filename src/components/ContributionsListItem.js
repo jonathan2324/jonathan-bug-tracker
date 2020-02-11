@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ContributionsForm from '../components/ContributionsForm'
-import { editContribution, removeContribution } from '../actions/bugs'
+import { startEditContribution, startRemoveContribution } from '../actions/bugs'
 
 
 export class ContributionsListItem extends React.Component {
@@ -19,15 +19,15 @@ export class ContributionsListItem extends React.Component {
         this.setState(() => ({ editing: editing }))
     }
     
-    editContribution = (contributionObj) => { //this is this.addContribution
-        this.props.editContribution(this.props.bugID, this.props.id, contributionObj) //this represents the addContribution mapDispatchToProps
+    startEditContribution = (contributionObj) => { //this is this.addContribution
+        this.props.startEditContribution(this.props.bugID, this.props.id, contributionObj) //this represents the addContribution mapDispatchToProps
         this.setState(() => ({
             editing: false
         }))
       }
     
-    removeContribution = () => {
-        this.props.removeContribution(this.props.bugID, this.props.id)
+      startRemoveContribution = () => {
+        this.props.startRemoveContribution(this.props.bugID, this.props.id)
     }
 
     render () {
@@ -35,9 +35,9 @@ export class ContributionsListItem extends React.Component {
     <div>
 
 
-        {this.state.editing ? <ContributionsForm key={this.props.id} contribution={this.props} onSubmitContribution={this.editContribution}/> : <p>Last edited by: {this.props.name} contribution: {this.props.contribution}</p>}
+        {this.state.editing ? <ContributionsForm key={this.props.id} contribution={this.props} onSubmitContribution={this.startEditContribution}/> : <p>Last edited by: {this.props.name} contribution: {this.props.contribution}</p>}
         <button onClick={this.onEditChange}>{this.state.editing ? "Editing" : "Edit" }</button>
-        <button onClick={this.removeContribution}>Remove</button>
+        <button onClick={this.startRemoveContribution}>Remove</button>
 
     </div>
         )
@@ -47,8 +47,8 @@ export class ContributionsListItem extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        editContribution: (bugID, id, contributionObj) => dispatch(editContribution(bugID ,id, contributionObj)),
-        removeContribution: (bugID, id) => dispatch(removeContribution(bugID, id))
+        startEditContribution: (bugID, id, contributionObj) => dispatch(startEditContribution(bugID ,id, contributionObj)),
+        startRemoveContribution: (bugID, id) => dispatch(startRemoveContribution(bugID, id))
     }
 
 

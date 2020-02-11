@@ -1,10 +1,19 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { addBug, editBug, removeBug, startAddBug } from '../../actions/bugs'
+import { addBug, editBug, removeBug, startAddBug, setBugs, startSetBugs, startRemoveBug} from '../../actions/bugs'
 import bugs from '../fixtures/bugs'
 import database from '../../firebase/firebase'
 
 const createMockStore = configureMockStore([thunk])
+
+beforeEach((done) => {
+    const bugsData = {}
+    bugs.forEach(({id, description, name, createdAt, priority, notes, completed }) => {
+        bugsData[id] = { description, name, createdAt, priority, notes, completed  }
+    })
+    
+    database.ref('bugs').set(bugsData).then(() => done())
+})
 
 //Test removeBug action object
 test('Should setup removeBug action object', () => {
@@ -14,6 +23,23 @@ test('Should setup removeBug action object', () => {
         type: 'REMOVE_BUG',
         id: '123abc'
     })
+})
+
+test('Should remove bug from firebase', (done) => {
+    const store =  createMockStore({})
+    const id = expense[2].id
+    store.dispatch(startRemoveBug({ id })).then(() => {
+        const actions = store.getActions()
+        expect(actions[0]).toEqual({
+            type: "REMOVE_BUG",
+            id
+        })
+        return database.ref(`bugs/${id}`).once('value')
+    }).then((snapshot) => {
+        expect(snapshot.val()).toBeFalsy()
+        done()
+    })
+
 })
 
 //Test editBug action object
@@ -69,7 +95,26 @@ test("Should add bug to database and store", (done) => {
     })
 })
 
+test('Should setup set bug action object with data', () => {
+    const action = setBugs(bugs)
+    expect(action).toEqual({
+        type: 'SET_BUGS',
+        bugs
+    })
+})
 
+test('Should fetch the bugs from firebase', (done) => {
+    const store = createMockStore({})
+    store.dispatch(startSetBugs()).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'SET_BUGS',
+            bugs
+        })
+        done()
+    })
+
+})
 
 // test('Should setup addBug action object with default values', () => {
 //     const bug={

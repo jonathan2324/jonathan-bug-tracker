@@ -5,12 +5,12 @@ import bugs from '../fixtures/bugs'
 import toJSON from 'enzyme-to-json'
 
 
-let editBug, removeBug, history, wrapper
+let editBug, startRemoveBug, history, wrapper
 beforeEach(() => {
     editBug = jest.fn()
-    removeBug = jest.fn()
+    startRemoveBug = jest.fn()
     history = { push: jest.fn() }
-    wrapper = shallow(<EditBugPage bug={bugs[0]} editBug={editBug} removeBug={removeBug} history={history}/>)
+    wrapper = shallow(<EditBugPage bug={bugs[0]} editBug={editBug} startRemoveBug={startRemoveBug} history={history}/>)
 })
 
 test('Should render EditBugPage', () => {
@@ -25,8 +25,8 @@ test('Should handle editBug', () => {
 })
 
 
-test('Should handle removeBug', () => {
+test('Should handle startRemoveBug', () => {
     wrapper.find('button').simulate('click')
-    expect(removeBug).toHaveBeenLastCalledWith({ id: bugs[0].id })
+    expect(startRemoveBug).toHaveBeenLastCalledWith({ id: bugs[0].id })
     expect(history.push).toHaveBeenLastCalledWith('/')
 })

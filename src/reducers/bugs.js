@@ -36,17 +36,17 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                 }
             })
         case 'ADD_CONTRIBUTION':
-            return state.map((bug) => {
+            return state.filter((bug) => {
                 if(bug.id === action.id){
                     return {
                         ...bug,
                         contributions: [
-                            
                             action.contribution,
-                            ...bug.contributions,
-                            
+                            bug.contributions
                         ]
                     }
+                        
+                    
                 } else return bug
             })
         case 'EDIT_CONTRIBUTION':
@@ -77,6 +77,19 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                         contributions: bug.contributions.filter((contribution) => {
                             return (contribution.id !== action.contributionID)
                         })
+                    }
+                } else {
+                    return bug
+                }
+            })
+        case 'SET_BUGS':
+            return action.bugs
+        case 'SET_CONTRIBUTIONS':
+            return state.map((bug) => {
+                if(bug.id === action.id) {
+                    return {
+                        ...bug,
+                        contributions: action.contributions
                     }
                 } else {
                     return bug

@@ -49,3 +49,13 @@ test('should not edit an expense if the id is not found', () => {
     expect(state).toEqual(bugs)
 
 })
+
+test('Should set bugs', () => {
+    const action = {
+        type: 'SET_BUGS',
+        bugs: [bugs[1]]
+    }
+
+    const state = bugsReducer(bugs, action)
+    expect(state).toEqual([bugs[1]])
+})

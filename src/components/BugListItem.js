@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux'
-import { toggleCompletedBug } from '../actions/bugs'
+import { startToggleCompletedBug } from '../actions/bugs'
 import moment from 'moment'
 
 export const BugListItem = ({ dispatch, id, name, description, priority, createdAt, completed}) => (
@@ -20,7 +20,7 @@ export const BugListItem = ({ dispatch, id, name, description, priority, created
             </p>
         
 
-        <button onClick={(e) => dispatch(toggleCompletedBug(id, completed))}>{completed ? 'Closed': 'Open'}</button>
+        <button onClick={(e) => dispatch(startToggleCompletedBug(id, completed))}>{completed ? 'Closed': 'Open'}</button>
     </div>
 
 

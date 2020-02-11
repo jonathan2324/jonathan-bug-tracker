@@ -1,4 +1,3 @@
-import uuid from 'uuid'
 import database from '../firebase/firebase'
 
 //ADD_BUG
@@ -39,12 +38,30 @@ export const removeBug = ({ id }) => ({
     id
 })
 
+//Start REMOVE_BUG
+export const startRemoveBug = ({id} = {}) => {
+    return (dispatch) => {
+        return database.ref(`bugs/${id}`).remove().then(() => {
+            dispatch(removeBug({ id }))
+        })
+    }
+}
+
 //Edit Bug
 export const editBug = (id, updates) => ({
     type: 'EDIT_BUG',
     id,
     updates
 })
+
+//Start edit bug
+export const startEditBug = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`bugs/${id}`).update(updates).then(() => {
+            dispatch(editBug(id, updates))
+        })
+    }
+}
 
 //TOGGLE COMPLETED
 export const toggleCompletedBug = (id, completed) => ({
@@ -53,21 +70,43 @@ export const toggleCompletedBug = (id, completed) => ({
     completed
 })
 
+//start Toggle Completed
+
+export const startToggleCompletedBug = (id, completed) => {
+    return (dispatch) => {
+        return database.ref(`bugs/${id}`).update({ completed: !completed }).then(() => {
+            dispatch(toggleCompletedBug(id, completed))
+        })
+    }
+}
+
 //ADD_CONTRIBUTION
-export const addContribution = (id, {
-    name = '',
-    contribution = ''
-}) => ({
+export const addContribution = (id, contribution) => ({
     type: 'ADD_CONTRIBUTION',
     id,
-    contribution:
-    {
-        id: uuid(),
-        name,
-        contribution
-    }
+    contribution
 
 })
+
+//Start add CONTRIBUTION
+export const startAddContribution = (id, bugContributionData = {}) => {
+    return (dispatch) => {
+        const { 
+            name = '',
+            contribution = ''
+          } = bugContributionData
+
+          const contributionData = { name, contribution }
+          return database.ref(`bugs/${id}/contributions`).push(contributionData).then((ref) => {
+              dispatch(addContribution(id, {
+                  id: ref.key,
+                  name: contributionData.name,
+                  contribution: contributionData.contribution
+              }))
+          })
+    }
+}
+
 
 //EDIT_CONTRIBUTION
 export const editContribution = (bugID, contributionID, updatedContribution) => ({
@@ -77,9 +116,80 @@ export const editContribution = (bugID, contributionID, updatedContribution) => 
     updatedContribution
 })
 
+//Start edit contribution
+export const startEditContribution = (bugID, contributionID, updatedContribution) => {
+    return (dispatch) => {
+        return database.ref(`bugs/${bugID}/contributions/${contributionID}`).update(updatedContribution).then(() => {
+            dispatch(editContribution(bugID, contributionID, updatedContribution))
+        })
+    }
+}
 //REMOVE_CONTRIBUTION
 export const removeContribution = (bugID, contributionID) => ({
     type: 'REMOVE_CONTRIBUTION',
     bugID,
     contributionID
 })
+
+//Start remove contribution
+export const startRemoveContribution = (bugID, contributionID) => {
+    return (dispatch) => {
+        return database.ref(`bugs/${bugID}/contributions/${contributionID}`).remove().then(() => {
+            dispatch(removeContribution(bugID, contributionID))
+        })
+    }
+}
+
+//SET_BUGS
+export const setBugs = (bugs) => ({
+    type: 'SET_BUGS',
+    bugs
+})
+
+//startSetBugs
+
+export const startSetBugs = (bugs) => {
+    return (dispatch) => {
+        //return here makes sure the promise gets returned
+        return database.ref('bugs').once('value').then((snapshot) => {
+            const bugs = []
+            snapshot.forEach((childSnapshot) => {
+                bugs.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                })
+            })
+            dispatch(setBugs(bugs))
+        })
+
+        
+    }
+}
+
+
+//set contributions
+export const setContributions = (id, contributions = []) => (    
+    {
+    type: 'SET_CONTRIBUTIONS',
+    id,
+    contributions
+    
+})
+
+//start set contributions
+export const startSetContributions = (id) => {
+    return (dispatch) => {
+         return database.ref(`bugs/${id}/contributions`).once('value').then((snapshot) => {
+            const contributions = []
+            snapshot.forEach((childSnapshot) => {
+                contributions.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+
+                })
+            })
+    
+            dispatch(setContributions(id, contributions))
+        })
+    }
+}

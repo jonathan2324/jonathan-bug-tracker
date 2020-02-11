@@ -7,7 +7,11 @@ const bugs = [{
     notes: 'notes 1',
     priority: 'Med',
     createdAt: 0,
-    completed: true
+    completed: true,
+    contributions: [{
+        name: 'Wade',
+        contribution: 'Error3'
+    }]
 
 }, {
     id: '2',
@@ -16,7 +20,11 @@ const bugs = [{
     notes: 'notes 2',
     priority: "High",
     createdAt: moment(0).subtract(4, 'days').valueOf(),
-    completed: false
+    completed: false,
+    contributions: [{
+        name: 'Mike',
+        contribution: 'Error1'
+    }]
 }, {
     id: '3',
     name: 'Jon',
@@ -24,7 +32,11 @@ const bugs = [{
     notes: 'notes 3',
     priority: 'Low',
     createdAt: moment(0).add(4, 'days').valueOf(),
-    completed: false
+    completed: false,
+    contributions: [{
+        name: 'Jason',
+        contribution: 'Error2'
+    }]
 
     }
 ]

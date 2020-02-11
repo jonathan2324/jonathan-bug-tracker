@@ -1,10 +1,14 @@
 import React from 'react'
 import ContributionsListItem from './ContributionsListItem'
+import {connect } from 'react-redux'
+
+export const ContributionsList = (props) =>{
 
 
-export const ContributionsList = (props) => (
+    return (
 
     <div>
+        
         {
             props.bug.contributions.length === 0 ? 
             (<p>No contributions</p>) : 
@@ -12,9 +16,19 @@ export const ContributionsList = (props) => (
                 return <ContributionsListItem key={contribution.id} bugID={props.bug.id} {...contribution}/>}))
         
         } 
+
         
     </div>
-)
+)}
 
 
-export default ContributionsList
+export default connect()(ContributionsList)
+
+
+// {
+//     props.bug.contributions.length === 0 ? 
+//     (<p>No contributions</p>) : 
+//     (props.bug.contributions.map((contribution) => {
+//         return <ContributionsListItem key={contribution.id} bugID={props.bug.id} {...contribution}/>}))
+
+// } 
