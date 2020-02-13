@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider,  } from 'react-redux'
+import { Provider  } from 'react-redux'
 import * as serviceWorker from './serviceWorker';
 import { startSetBugs } from '../src/actions/bugs'
-import AppRouter from './routers/AppRouter'
+import AppRouter, { history } from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import 'react-dates/lib/css/_datepicker.css'
 import './styles/styles.scss'
-import './firebase/firebase'
+import { firebase } from './firebase/firebase'
+import { login, logout } from '../src/actions/auth'
 
 
 
@@ -34,12 +35,31 @@ const jsx = (
     
 )
 
+let hasRendered = false //have not rendered
+const renderApp = () => {
+    if(!hasRendered) { //if we have not rendered, we are going to render
+        ReactDOM.render(jsx, document.getElementById('root'));
+        hasRendered = true
+    }
+}
+
 ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
 
-store.dispatch(startSetBugs()).then(() => {
-    ReactDOM.render(jsx, document.getElementById('root'));
+firebase.auth().onAuthStateChanged((user) => {
+    if(user) {
+        store.dispatch(login(user.uid))
+        store.dispatch(startSetBugs()).then(() => {
+            renderApp()
+            if(history.location.pathname === '/') {
+                history.push('/dashboard')
+            }
+        })
+    } else {
+        store.dispatch(logout())
+        renderApp()
+        history.push('/')
+    }
 })
-
 
 
 // If you want your app to work offline and load faster, you can change

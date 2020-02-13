@@ -9,7 +9,8 @@ export const addBug = (bug) => ({
 
 //START addBUg
 export const startAddBug = (bugData = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
         const { 
             name = '',
             description = '',
@@ -17,12 +18,12 @@ export const startAddBug = (bugData = {}) => {
             priority = 'Low',
             completed = false,
             createdAt = 0,
-            contributions = []
+            contributions = [{id: '0', name: "initial", contribution: "initial"}]
           } = bugData
 
           const bug = { name, description, priority, completed, notes, createdAt, contributions }
 
-          return database.ref('bugs').push(bug).then((ref) => {
+          return database.ref(`users/${uid}/bugs`).push(bug).then((ref) => {
               dispatch(addBug({
                   id: ref.key,
                   ...bug
@@ -40,8 +41,9 @@ export const removeBug = ({ id }) => ({
 
 //Start REMOVE_BUG
 export const startRemoveBug = ({id} = {}) => {
-    return (dispatch) => {
-        return database.ref(`bugs/${id}`).remove().then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${id}`).remove().then(() => {
             dispatch(removeBug({ id }))
         })
     }
@@ -56,8 +58,9 @@ export const editBug = (id, updates) => ({
 
 //Start edit bug
 export const startEditBug = (id, updates) => {
-    return (dispatch) => {
-        return database.ref(`bugs/${id}`).update(updates).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${id}`).update(updates).then(() => {
             dispatch(editBug(id, updates))
         })
     }
@@ -73,8 +76,9 @@ export const toggleCompletedBug = (id, completed) => ({
 //start Toggle Completed
 
 export const startToggleCompletedBug = (id, completed) => {
-    return (dispatch) => {
-        return database.ref(`bugs/${id}`).update({ completed: !completed }).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${id}`).update({ completed: !completed }).then(() => {
             dispatch(toggleCompletedBug(id, completed))
         })
     }
@@ -90,14 +94,15 @@ export const addContribution = (id, contribution) => ({
 
 //Start add CONTRIBUTION
 export const startAddContribution = (id, bugContributionData = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
         const { 
             name = '',
             contribution = ''
           } = bugContributionData
 
           const contributionData = { name, contribution }
-          return database.ref(`bugs/${id}/contributions`).push(contributionData).then((ref) => {
+          return database.ref(`users/${uid}/bugs/${id}/contributions`).push(contributionData).then((ref) => {
               dispatch(addContribution(id, {
                   id: ref.key,
                   name: contributionData.name,
@@ -118,8 +123,9 @@ export const editContribution = (bugID, contributionID, updatedContribution) => 
 
 //Start edit contribution
 export const startEditContribution = (bugID, contributionID, updatedContribution) => {
-    return (dispatch) => {
-        return database.ref(`bugs/${bugID}/contributions/${contributionID}`).update(updatedContribution).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${bugID}/contributions/${contributionID}`).update(updatedContribution).then(() => {
             dispatch(editContribution(bugID, contributionID, updatedContribution))
         })
     }
@@ -133,8 +139,9 @@ export const removeContribution = (bugID, contributionID) => ({
 
 //Start remove contribution
 export const startRemoveContribution = (bugID, contributionID) => {
-    return (dispatch) => {
-        return database.ref(`bugs/${bugID}/contributions/${contributionID}`).remove().then(() => {
+    return (dispatch,getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${bugID}/contributions/${contributionID}`).remove().then(() => {
             dispatch(removeContribution(bugID, contributionID))
         })
     }
@@ -149,9 +156,10 @@ export const setBugs = (bugs) => ({
 //startSetBugs
 
 export const startSetBugs = (bugs) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
         //return here makes sure the promise gets returned
-        return database.ref('bugs').once('value').then((snapshot) => {
+        return database.ref(`users/${uid}/bugs`).once('value').then((snapshot) => {
             const bugs = []
             snapshot.forEach((childSnapshot) => {
                 bugs.push({
@@ -178,8 +186,9 @@ export const setContributions = (id, contributions = []) => (
 
 //start set contributions
 export const startSetContributions = (id) => {
-    return (dispatch) => {
-         return database.ref(`bugs/${id}/contributions`).once('value').then((snapshot) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+         return database.ref(`users/${uid}/bugs/${id}/contributions`).once('value').then((snapshot) => {
             const contributions = []
             snapshot.forEach((childSnapshot) => {
                 contributions.push({

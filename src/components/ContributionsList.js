@@ -10,9 +10,9 @@ export const ContributionsList = (props) =>{
     <div>
         
         {
-            props.bug.contributions.length === 0 ? 
+            props.bug.contributions.length === 1 ? 
             (<p>No contributions</p>) : 
-            (props.bug.contributions.map((contribution) => {
+            (props.bug.contributions.filter((contribution) =>(contribution.id !== "0") ).map((contribution) => {
                 return <ContributionsListItem key={contribution.id} bugID={props.bug.id} {...contribution}/>}))
         
         } 
