@@ -4,19 +4,22 @@ import {connect} from 'react-redux'
 import { startToggleCompletedBug } from '../actions/bugs'
 import moment from 'moment'
 
-export const BugListItem = ({ dispatch, id, name, description, priority, createdAt, completed}) => (
+export const BugListItem = ({ dispatch, id, name, description, priority, createdAt, lastUpdatedAt, completedToggleDate, completed}) => (
     <div>
         <Link to={`/edit/${id}`}>
             <h3>
-                {name}
+                {description}
             </h3>
         </Link>
-            <p>{description}</p>
+            <p>Assigned to: {name}</p>
             
-            <p>{priority}</p>
-
+            <p>Priority: {priority}</p>
+            
             <p>
-                {moment(createdAt).format('MMMM Do, YYYY')}
+                {`Created on: ${moment(createdAt).format('MMMM Do, YYYY')}`}
+            </p>
+            <p>
+                {completed ? `Completed on: ${moment(completedToggleDate).format('MMMM Do, YYYY')}` : `Last updated: ${moment(lastUpdatedAt).fromNow()}`}
             </p>
         
 

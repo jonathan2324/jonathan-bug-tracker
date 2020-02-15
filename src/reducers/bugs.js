@@ -1,3 +1,4 @@
+import moment from "moment";
 
 
 //bugReducer
@@ -29,8 +30,10 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                 if (bug.id === action.id) {
                     return {
                         ...bug,
-                        completed: !action.completed
-                    }
+                        completed: !action.completed,
+                        completedToggleDate: moment().valueOf(),
+                        lastUpdatedAt: moment().valueOf()
+                        }
                 } else {
                     return bug
                 }
@@ -90,6 +93,17 @@ const bugReducer = (state = bugReducerDefaultState, action) => {
                     return {
                         ...bug,
                         contributions: action.contributions
+                    }
+                } else {
+                    return bug
+                }
+            })
+        case 'UPDATE_LAST_UPDATED':
+            return state.map((bug) => {
+                if(bug.id === action.id) {
+                    return {
+                        ...bug,
+                        lastUpdatedAt: moment().valueOf()
                     }
                 } else {
                     return bug

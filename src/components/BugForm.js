@@ -5,8 +5,9 @@ import { SingleDatePicker } from 'react-dates'
 
 
 
-const now = moment()
-console.log(now.format('MMM Do YYYY'))
+const timestamp = moment(moment(9852629862)) //timestamp in unix epoch
+
+console.log(`Last updated ${moment(timestamp).fromNow()}`)
 
 class BugForm extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class BugForm extends React.Component {
             description: props.bug ? props.bug.description : '',
             notes: props.bug ? props.bug.notes : '',
             createdAt: props.bug ? moment(props.bug.createdAt) : moment(),
+            lastUpdatedAt: props.bug ? moment(props.bug.lastUpdatedAt) : moment(),
             calendarFocused: false,
             error: ''
     
@@ -26,28 +28,28 @@ class BugForm extends React.Component {
 
     onNameChange = (e) => {
         const name = e.target.value 
-        this.setState(() => ({ name }))
+        this.setState(() => ({ name, lastUpdatedAt: moment() }))
     }
 
     onDescriptionChange = (e) => {
         const description = e.target.value
-        this.setState(() => ({ description }))
+        this.setState(() => ({ description, lastUpdatedAt: moment() }))
     }
 
     onNotesChange = (e) => {
         const notes = e.target.value
-        this.setState(() => ({ notes }))       
+        this.setState(() => ({ notes, lastUpdatedAt: moment() }))       
     }
 
     onPriorityChange = (e) => {
         const priority = e.target.value
-        this.setState(() => ({ priority }))
+        this.setState(() => ({ priority, lastUpdatedAt: moment() }))
     }
 
     onDateChange = (createdAt) => {
         if (createdAt) {
             this.setState(() => ({
-                createdAt
+                createdAt, lastUpdatedAt: moment()
             }))
 
         }
@@ -70,6 +72,7 @@ class BugForm extends React.Component {
                 notes: this.state.notes,
                 name: this.state.name,
                 createdAt: this.state.createdAt.valueOf(),
+                lastUpdatedAt: this.state.lastUpdatedAt.valueOf(),
                 priority: this.state.priority
             })
         }

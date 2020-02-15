@@ -13,7 +13,7 @@ export const ContributionsList = (props) =>{
             props.bug.contributions.length === 1 ? 
             (<p>No contributions</p>) : 
             (props.bug.contributions.filter((contribution) =>(contribution.id !== "0") ).map((contribution) => {
-                return <ContributionsListItem key={contribution.id} bugID={props.bug.id} {...contribution}/>}))
+                return <ContributionsListItem key={contribution.id} bug={props.bug} bugID={props.bug.id} {...contribution}/>}))
         
         } 
 
@@ -24,11 +24,3 @@ export const ContributionsList = (props) =>{
 
 export default connect()(ContributionsList)
 
-
-// {
-//     props.bug.contributions.length === 0 ? 
-//     (<p>No contributions</p>) : 
-//     (props.bug.contributions.map((contribution) => {
-//         return <ContributionsListItem key={contribution.id} bugID={props.bug.id} {...contribution}/>}))
-
-// } 

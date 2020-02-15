@@ -1,4 +1,5 @@
 import database from '../firebase/firebase'
+import moment from 'moment'
 
 //ADD_BUG
 export const addBug = (bug) => ({
@@ -18,10 +19,12 @@ export const startAddBug = (bugData = {}) => {
             priority = 'Low',
             completed = false,
             createdAt = 0,
+            lastUpdatedAt = 0,
+            completedToggleDate = 0,
             contributions = [{id: '0', name: "initial", contribution: "initial"}]
           } = bugData
 
-          const bug = { name, description, priority, completed, notes, createdAt, contributions }
+          const bug = { name, description, priority, completed, notes, createdAt, lastUpdatedAt, completedToggleDate, contributions }
 
           return database.ref(`users/${uid}/bugs`).push(bug).then((ref) => {
               dispatch(addBug({
@@ -78,7 +81,7 @@ export const toggleCompletedBug = (id, completed) => ({
 export const startToggleCompletedBug = (id, completed) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid
-        return database.ref(`users/${uid}/bugs/${id}`).update({ completed: !completed }).then(() => {
+        return database.ref(`users/${uid}/bugs/${id}`).update({ completed: !completed, completedToggleDate: moment().valueOf(), lastUpdatedAt: moment().valueOf() }).then(() => {
             dispatch(toggleCompletedBug(id, completed))
         })
     }
@@ -199,6 +202,24 @@ export const startSetContributions = (id) => {
             })
     
             dispatch(setContributions(id, contributions))
+        })
+    }
+}
+
+//Update Timestamp
+
+export const updateLastUpdatedAt = (id) => ({
+    type: 'UPDATE_LAST_UPDATED',
+    id
+
+})
+
+//set updatedlastupdated
+export const startUpdateLastUpdated = (id) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid
+        return database.ref(`users/${uid}/bugs/${id}`).update({ lastUpdatedAt: moment().valueOf()}).then(() => {
+            dispatch(updateLastUpdatedAt(id))
         })
     }
 }

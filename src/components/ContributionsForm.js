@@ -1,6 +1,6 @@
 import React from 'react'
-
-
+import { connect } from 'react-redux'
+import { startUpdateLastUpdated } from '../actions/bugs'
 
 export class ContributionsForm extends React.Component {
     constructor(props) {
@@ -8,6 +8,7 @@ export class ContributionsForm extends React.Component {
         this.state = {
             name: this.props.contribution ? this.props.contribution.name : '',
             contribution: this.props.contribution ? this.props.contribution.contribution : '',
+            updateLastUpdatedTimestamp: false,
             error: ''
         }
     }
@@ -15,16 +16,29 @@ export class ContributionsForm extends React.Component {
     onNameChange = (e) => {
         const name = e.target.value
         this.setState(() => ({
-            name: name
+            name: name,
+            updateLastUpdatedTimestamp: true
         }))
+
     }
 
     onContributionChange = (e) => {
         const contribution = e.target.value
         this.setState(() => ({
-            contribution: contribution
+            contribution: contribution,
+            updateLastUpdatedTimestamp: true
         }))
+
     }
+
+    // componentDidUpdate = () => {
+    //     if(this.state.updateLastUpdatedTimestamp) {
+    //         this.props.startUpdateLastUpdated(this.props.bug.id)
+    //         this.setState(() => ({ updateLastUpdatedTimestamp: false}))
+    //     } 
+    // }
+    
+
 
     onSubmit = (e) => {
         e.preventDefault()
@@ -37,11 +51,16 @@ export class ContributionsForm extends React.Component {
                 contribution: this.state.contribution
             })
         }
-        
+        if(this.state.updateLastUpdatedTimestamp) {
+            this.props.startUpdateLastUpdated(this.props.bug.id)
+            
+        } 
 
         this.setState(() => ({
             name: '',
-            contribution: ''
+            contribution: '',
+            updateLastUpdatedTimestamp: false
+            
         }))
         
     }
@@ -53,7 +72,7 @@ export class ContributionsForm extends React.Component {
                 <p>{this.state.error}</p>
                 <form onSubmit={this.onSubmit}>
                     <input type='text' placeholder='Enter name' value={this.state.name} onChange={this.onNameChange}/>
-                    <input type='text' placeholder='Enter contribution' value={this.state.contribution} onChange={this.onContributionChange}/>
+                    <textarea type='text' placeholder='Enter contribution' value={this.state.contribution} onChange={this.onContributionChange}/>
                     <button>Save contribution</button>
                 </form>
             
@@ -62,5 +81,8 @@ export class ContributionsForm extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch, props) => ({
+    startUpdateLastUpdated:(id) => dispatch(startUpdateLastUpdated(id))
+})
 
-export default ContributionsForm
+export default connect(undefined, mapDispatchToProps)(ContributionsForm)

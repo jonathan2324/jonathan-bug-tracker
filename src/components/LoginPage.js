@@ -4,8 +4,10 @@ import { startLogin } from '../actions/auth'
 
 
 const LoginPage = ({ startLogin }) => (
-    <div>
-        <button onClick={startLogin}>Log in</button>
+    <div className="box-layout">
+        <div className="box-layout__box">
+            <button className="button" onClick={startLogin}>Log in</button>
+        </div>
     </div>
 )
 

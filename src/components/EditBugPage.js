@@ -4,7 +4,7 @@ import BugForm from '../components/BugForm'
 import { startRemoveBug, startSetContributions } from '../actions/bugs'
 import { startEditBug } from '../actions/bugs';
 import { startAddContribution } from '../actions/bugs'
-import { ContributionsForm } from './ContributionsForm';
+import ContributionsForm from './ContributionsForm';
 import ContributionsList from '../components/ContributionsList'
 
 
@@ -93,10 +93,3 @@ const mapDispatchToProps = (dispatch, props) => {
 export default connect(mapStateToProps, mapDispatchToProps)(EditBugPage);
 
 
-/*
-
-      <ContributionsForm bug={this.props.bug} onSubmitContribution={this.startAddContribution}/>      
-      <ContributionsList bug={this.props.bug} />
-
-
-*/
