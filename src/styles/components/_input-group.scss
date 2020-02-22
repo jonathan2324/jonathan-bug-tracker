@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: $m-size;
-    
+    justify-content: center;
     @media (min-width: $desktop-breakpoint ) {
         flex-direction: row;
         margin-bottom: $l-size;
@@ -17,4 +17,118 @@
         margin-right: $s-size;
         margin: 0 $s-size 0 0;
     }
+}
+
+.DateInput{
+    background: $off-white;
+}
+
+.DateRangePickerInput {
+    background: $off-white;
+    height: 34px;
+}
+
+.DateInput {
+    padding: 0 8px;
+    height: 24px;
+}
+
+.DateInput--with-caret::before {
+    content: none;
+}
+
+.DateInput--with-caret::after {
+    content: none;
+}
+
+.DateRangePicker__picker--open-down{
+    top: 50px;
+}
+
+.DatePicker__picker--direction-left {
+    left: none;
+}
+
+.DateInput__display-text--focused {
+    background: $date-picker-blue;
+    border-color: black;
+    color: #333333 !important;
+}
+
+.CalendarDay--selected-span {
+    background: $date-picker-blue;
+    border: 1px double $date-picker-blue-border;
+    color: white;
+    :hover {
+        background: $date-picker-blue;
+        border: 1px double $date-picker-blue-border;
+        color:white;
+    }
+}
+
+
+
+.CalendarDay--hovered-span {
+    background: $date-picker-blue;
+    border: 1px double $date-picker-blue-border;
+    color: white;
+    
+    :active {
+        background: $date-picker-blue;
+        border: 1px solid $date-picker-blue-border;
+        
+        color:white;
+    }
+}
+
+
+.CalendarDay--hovered {
+    background: $date-picker-dark-blue;
+    border: 1px double $date-picker-blue-border;
+    
+    
+}
+.CalendarDay--selected-start {
+    background: $date-picker-dark-blue;
+    border: 1px double $date-picker-blue-border;
+    :active{
+        background: $date-picker-dark-blue;
+    }
+}
+
+.CalendarDay--selected-end {
+    background: $date-picker-dark-blue;
+    border: 1px double $date-picker-blue-border;
+    :active {
+        background: $date-picker-dark-blue;
+    }
+}
+
+.CalendarDay--after-hovered-start {
+    background: #82acff;
+    border: 1px double $date-picker-blue-border;
+    color: #333333 !important;
+}
+
+.DayPickerKeyboardShortcuts__show--bottom-right {
+    border-right-color: $date-picker-dark-blue;
+    :hover {
+        border-right: none;
+    }
+}
+
+.DateInput__display-text {
+    padding: 0px 8px;
+}
+
+.DateInput {
+    font-size: 1.6rem;
+}
+
+.DateRangePickerInput__clear-dates {
+    padding: 0.6rem
+}
+
+.DateRangePicker__picker--open-down {
+    top: 3.4rem;
 }

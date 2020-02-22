@@ -8,7 +8,6 @@ import  BugsSummary  from './BugsSummary';
 const DashboardPage = () => {
   return (
     <div >
-        <BugsSummary />
         <BugListFilters />
         <BugList />
     </div>
@@ -16,3 +15,6 @@ const DashboardPage = () => {
 }
 
 export default DashboardPage;
+
+
+//        <BugsSummary />

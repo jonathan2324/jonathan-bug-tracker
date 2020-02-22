@@ -6,12 +6,16 @@ import { startLogout } from '../actions/auth'
 
 const HeaderPage = ({ startLogout }) => {
   return (
-    <div>
-      <h1>Task Manager</h1>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/create">Add Bug</Link>
-      <button onClick={startLogout}>Logout</button>
-    </div>
+    <header className="header">
+      <div className="content-container">
+        <div className="header__content"> 
+          <Link className="header__title" to="/dashboard">
+            <h1>Task Manager</h1>
+          </Link>
+          <button className="button button--link" onClick={startLogout}>Logout</button>
+        </div>
+      </div>
+    </header>
   );
 }
 
@@ -22,3 +26,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(undefined, mapDispatchToProps)(HeaderPage)
+
+//

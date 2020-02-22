@@ -11,9 +11,7 @@ export const BugListItem = ({ dispatch, id, name, description, priority, created
                 {description}
             </h3>
         </Link>
-            <p>Assigned to: {name}</p>
-            
-            <p>Priority: {priority}</p>
+            <p>Assigned to: {name}, Priority: {priority}</p>
             
             <p>
                 {`Created on: ${moment(createdAt).format('MMMM Do, YYYY')}`}
